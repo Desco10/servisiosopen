@@ -39,7 +39,7 @@ header {
 }
 
 header .overlay {
- box-shadow: 0 2px 6px rgba(245, 242, 242, 0.515);
+ box-shadow: 0 2px 6px rgba(245, 242, 242, 0.699);
   padding: 15px 20px;
   border-radius: 10px;
 }
@@ -61,8 +61,8 @@ header p {
   transform: translateX(-50%);
   width: 140px; 
   height: auto;   
-  box-shadow: 0 2px 6px rgba(245, 242, 242, 0.514);
-  border-radius: 50%;  /* opcional redondo */
+  /*box-shadow: 0 2px 6px rgba(245, 242, 242, 0.514);
+/*  border-radius:%;  /* opcional redondo */
 }
 
 /* versión móvil del logo */
