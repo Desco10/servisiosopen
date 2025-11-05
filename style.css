@@ -16,7 +16,6 @@ body {
 /* ====== HEADER ====== */
 header {  
   background-image: url(https://img1.wsimg.com/isteam/ip/f04a3b85-a842-4389-9537-7d26d92e9243/programacion-web.jpg); 
-  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   height: 400px;
@@ -61,8 +60,8 @@ header p {
   transform: translateX(-50%);
   width: 140px; 
   height: auto;   
-  /*box-shadow: 0 2px 6px rgba(245, 242, 242, 0.514);
-/*  border-radius:%;  /* opcional redondo */
+  box-shadow: 0 8px 12px rgba(6, 134, 238, 0.658);
+  border-radius:50%;  /* opcional redondo */
 }
 
 /* versión móvil del logo */
