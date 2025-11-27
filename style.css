@@ -19,13 +19,13 @@ header {
   background-position: center;
   background-repeat: no-repeat;
   height: 600px;
-  color: white;
+  color: rgb(255, 255, 255);
   text-align: center;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-top: 20px; 
+  padding-top: 10px; 
 }
 
 /* versión móvil */
@@ -37,11 +37,12 @@ header {
   }
 }
 
-header .overlay {
- box-shadow: 0 2px 6px rgba(245, 242, 242, 0.222);
+/*header .overlay {
+ box-shadow: 0 2px 6px rgba(245, 242, 242, 0.105);
   padding: 15px 20px;
   border-radius: 10px;
-}
+  
+}*/
 
 header h1 { 
   margin: 0; 
