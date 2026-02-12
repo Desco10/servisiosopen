@@ -1,43 +1,63 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  const carousel = document.querySelector(".carousel");
+  const carousels = document.querySelectorAll(".carousel");
   const cards = document.querySelectorAll(".card");
 
   /* =========================
-     DRAG SOLO PARA MOUSE
+     CONTROL INTELIGENTE TOUCH
   ========================== */
 
-  let isDown = false;
-  let startX;
-  let scrollLeft;
+  carousels.forEach(carousel => {
 
-  carousel.addEventListener("mousedown", (e) => {
-    isDown = true;
-    startX = e.pageX - carousel.offsetLeft;
-    scrollLeft = carousel.scrollLeft;
-    carousel.style.cursor = "grabbing";
+    let startX = 0;
+    let startY = 0;
+    let isDragging = false;
+    let isHorizontal = false;
+
+    carousel.addEventListener("touchstart", (e) => {
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+      isDragging = true;
+      isHorizontal = false;
+    }, { passive: true });
+
+    carousel.addEventListener("touchmove", (e) => {
+
+      if (!isDragging) return;
+
+      const currentX = e.touches[0].clientX;
+      const currentY = e.touches[0].clientY;
+
+      const diffX = currentX - startX;
+      const diffY = currentY - startY;
+
+      // Detectar intención
+      if (!isHorizontal) {
+        if (Math.abs(diffX) > Math.abs(diffY) + 5) {
+          isHorizontal = true;
+        } else if (Math.abs(diffY) > Math.abs(diffX)) {
+          isDragging = false;
+          return; // dejamos que el body haga scroll vertical
+        }
+      }
+
+      if (isHorizontal) {
+        e.preventDefault();
+        carousel.scrollLeft -= diffX;
+        startX = currentX;
+      }
+
+    }, { passive: false });
+
+    carousel.addEventListener("touchend", () => {
+      isDragging = false;
+    });
+
   });
 
-  carousel.addEventListener("mouseleave", () => {
-    isDown = false;
-    carousel.style.cursor = "grab";
-  });
-
-  carousel.addEventListener("mouseup", () => {
-    isDown = false;
-    carousel.style.cursor = "grab";
-  });
-
-  carousel.addEventListener("mousemove", (e) => {
-    if (!isDown) return;
-    e.preventDefault();
-    const x = e.pageX - carousel.offsetLeft;
-    const walk = (x - startX) * 1.5;
-    carousel.scrollLeft = scrollLeft - walk;
-  });
 
   /* =========================
-     EFECTO 3D AL SCROLL
+     EFECTO 3D
   ========================== */
 
   function updateCards() {
@@ -57,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  carousel.addEventListener("scroll", updateCards);
+  carousels.forEach(c => c.addEventListener("scroll", updateCards));
   window.addEventListener("resize", updateCards);
   updateCards();
 
@@ -67,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
   ========================== */
 
   const modal = document.getElementById("modal");
-  const closeBtn = document.querySelector(".close");
+  const closeBtn = document.querySelector(".cerrar");
 
   cards.forEach(card => {
     card.addEventListener("click", () => {
