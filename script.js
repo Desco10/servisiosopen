@@ -1,30 +1,31 @@
 document.addEventListener("DOMContentLoaded", () => {
+
   const carousel = document.querySelector(".carousel");
   const cards = document.querySelectorAll(".card");
 
   /* =========================
-     DRAG HORIZONTAL INTELIGENTE
+     DRAG SOLO PARA MOUSE
   ========================== */
 
   let isDown = false;
   let startX;
-  let startY;
   let scrollLeft;
-  let isHorizontal = false;
 
-  // Mouse
   carousel.addEventListener("mousedown", (e) => {
     isDown = true;
     startX = e.pageX - carousel.offsetLeft;
     scrollLeft = carousel.scrollLeft;
+    carousel.style.cursor = "grabbing";
   });
 
   carousel.addEventListener("mouseleave", () => {
     isDown = false;
+    carousel.style.cursor = "grab";
   });
 
   carousel.addEventListener("mouseup", () => {
     isDown = false;
+    carousel.style.cursor = "grab";
   });
 
   carousel.addEventListener("mousemove", (e) => {
@@ -35,41 +36,8 @@ document.addEventListener("DOMContentLoaded", () => {
     carousel.scrollLeft = scrollLeft - walk;
   });
 
-  // Touch
-  carousel.addEventListener("touchstart", (e) => {
-    startX = e.touches[0].pageX;
-    startY = e.touches[0].pageY;
-    scrollLeft = carousel.scrollLeft;
-    isHorizontal = false;
-  }, { passive: true });
-
-  carousel.addEventListener("touchmove", (e) => {
-    const x = e.touches[0].pageX;
-    const y = e.touches[0].pageY;
-
-    const diffX = Math.abs(x - startX);
-    const diffY = Math.abs(y - startY);
-
-    // Detectamos dirección dominante
-    if (!isHorizontal) {
-      if (diffX > diffY) {
-        isHorizontal = true;
-      } else {
-        return; // dejamos scroll vertical normal
-      }
-    }
-
-    if (isHorizontal) {
-      e.preventDefault();
-      const walk = (x - startX) * 1.5;
-      carousel.scrollLeft = scrollLeft - walk;
-    }
-
-  }, { passive: false });
-
-
   /* =========================
-     EFECTO 3D AL SCROLLEAR
+     EFECTO 3D AL SCROLL
   ========================== */
 
   function updateCards() {

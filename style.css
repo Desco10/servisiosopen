@@ -111,15 +111,13 @@ h2{
   display:flex;
   gap:30px;
   overflow-x:auto;
-  overflow-y:hidden;
   padding:40px 20px;
   perspective:1200px;
   cursor:grab;
   scroll-behavior:smooth;
   -webkit-overflow-scrolling: touch;
-  overscroll-behavior-x: contain;
-  touch-action: pan-x;
 }
+
 
 .carousel::-webkit-scrollbar{display:none}
 
@@ -133,7 +131,7 @@ h2{
   position:relative;
   backface-visibility:hidden;
   pointer-events:auto;
-  touch-action:auto;
+  
 }
 
 .card-media{height:200px;overflow:hidden}
