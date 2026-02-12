@@ -1,6 +1,4 @@
-/* ===============================
-   MODAL UNIFICADO
-================================ */
+/* MODAL */
 function abrirModal(element) {
   const modal = document.getElementById("modal");
   const modalImg = document.getElementById("modal-img");
@@ -18,7 +16,6 @@ function abrirModal(element) {
   } else if (element.tagName.toLowerCase() === "video") {
     element.pause();
     element.currentTime = 0;
-
     modalVideo.src = element.src;
     modalVideo.style.display = "block";
     modalImg.style.display = "none";
@@ -44,37 +41,24 @@ window.addEventListener("click", e => {
   const modal = document.getElementById("modal");
   if (e.target === modal) cerrarModal();
 });
-
 window.addEventListener("touchstart", e => {
   const modal = document.getElementById("modal");
   if (e.target === modal) cerrarModal();
 }, { passive: true });
 
-/* ===============================
-   BOTÓN SERVICIOS
-================================ */
+/* BOTÓN SERVICIOS */
 const btn = document.getElementById('toggleServicios');
 const contenido = document.getElementById('contenidoServicios');
-const texto = document.getElementById("serviciosTexto");
 let visible = false;
-
 btn.addEventListener('click', () => {
   visible = !visible;
   contenido.style.display = visible ? 'block' : 'none';
-  texto.style.display = visible ? 'block' : 'none';
   btn.textContent = visible ? 'Ocultar Servicios' : 'Ver Servicios';
 });
 
-/* ===============================
-   CARRUSEL SUAVE SIN BLOQUEAR SCROLL
-================================ */
+/* CARRUSEL */
 document.querySelectorAll('.carousel').forEach(carousel => {
-
-  let isDown = false;
-  let startX = 0;
-  let startY = 0;
-  let scrollStart = 0;
-
+  let isDown = false, startX=0, startY=0, scrollStart=0;
   const cards = carousel.querySelectorAll('.card');
 
   function updateCenter(){
@@ -93,7 +77,6 @@ document.querySelectorAll('.carousel').forEach(carousel => {
   window.addEventListener('resize', updateCenter);
   setTimeout(updateCenter, 300);
 
-  // TOUCH
   carousel.addEventListener("touchstart", e => {
     isDown = true;
     startX = e.touches[0].pageX;
@@ -102,34 +85,31 @@ document.querySelectorAll('.carousel').forEach(carousel => {
   }, { passive: true });
 
   carousel.addEventListener("touchmove", e => {
-    if (!isDown) return;
+    if(!isDown) return;
     const x = e.touches[0].pageX;
     const y = e.touches[0].pageY;
     const dx = x - startX;
     const dy = y - startY;
 
-    // Solo mover horizontal si gesto horizontal mayor que vertical
     if(Math.abs(dx) > Math.abs(dy)){
       e.preventDefault();
       carousel.scrollLeft = scrollStart - dx;
     }
   }, { passive: false });
 
-  carousel.addEventListener("touchend", () => isDown = false);
-  carousel.addEventListener("touchcancel", () => isDown = false);
+  carousel.addEventListener("touchend", ()=>isDown=false);
+  carousel.addEventListener("touchcancel", ()=>isDown=false);
 
-  // MOUSE DESKTOP
   carousel.addEventListener("mousedown", e => {
     isDown = true;
     startX = e.pageX;
     scrollStart = carousel.scrollLeft;
   });
 
-  carousel.addEventListener("mouseup", () => isDown = false);
-  carousel.addEventListener("mouseleave", () => isDown = false);
-
+  carousel.addEventListener("mouseup", ()=>isDown=false);
+  carousel.addEventListener("mouseleave", ()=>isDown=false);
   carousel.addEventListener("mousemove", e => {
-    if (!isDown) return;
+    if(!isDown) return;
     const dx = e.pageX - startX;
     carousel.scrollLeft = scrollStart - dx;
   });
