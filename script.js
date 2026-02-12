@@ -1,71 +1,120 @@
-/* MODAL */
-function abrirModal(element) {
-  const modal = document.getElementById("modal");
-  const modalImg = document.getElementById("modal-img");
-  const modalVideo = document.getElementById("modal-video");
+document.addEventListener("DOMContentLoaded", () => {
+  const carousel = document.querySelector(".carousel");
+  const cards = document.querySelectorAll(".card");
 
-  modal.style.display = "flex";
-  document.body.style.overflow = "hidden";
-
-  if (element.tagName.toLowerCase() === "img") {
-    modalImg.src = element.src;
-    modalImg.style.display = "block";
-    modalVideo.style.display = "none";
-    modalVideo.pause();
-    modalVideo.src = "";
-  } else {
-    element.pause();
-    modalVideo.src = element.src;
-    modalVideo.style.display = "block";
-    modalImg.style.display = "none";
-    modalVideo.muted = false;
-    modalVideo.play().catch(() => modalVideo.controls = true);
-  }
-}
-
-function cerrarModal() {
-  const modal = document.getElementById("modal");
-  const modalVideo = document.getElementById("modal-video");
-  const modalImg = document.getElementById("modal-img");
-
-  modal.style.display = "none";
-  modalVideo.pause();
-  modalVideo.src = "";
-  modalImg.src = "";
-  document.body.style.overflow = "auto";
-}
-
-/* BOTÓN SERVICIOS */
-const btn = document.getElementById('toggleServicios');
-const contenido = document.getElementById('contenidoServicios');
-let visible = false;
-
-btn.addEventListener('click', () => {
-  visible = !visible;
-  contenido.style.display = visible ? 'block' : 'none';
-  btn.textContent = visible ? 'Ocultar Servicios' : 'Ver Servicios';
-});
-
-/* CARRUSEL */
-document.querySelectorAll('.carousel').forEach(carousel => {
+  /* =========================
+     DRAG HORIZONTAL INTELIGENTE
+  ========================== */
 
   let isDown = false;
-  let startX = 0;
-  let scrollStart = 0;
+  let startX;
+  let startY;
+  let scrollLeft;
+  let isHorizontal = false;
 
-  carousel.addEventListener("mousedown", e => {
+  // Mouse
+  carousel.addEventListener("mousedown", (e) => {
     isDown = true;
-    startX = e.pageX;
-    scrollStart = carousel.scrollLeft;
+    startX = e.pageX - carousel.offsetLeft;
+    scrollLeft = carousel.scrollLeft;
   });
 
-  carousel.addEventListener("mouseup", () => isDown = false);
-  carousel.addEventListener("mouseleave", () => isDown = false);
+  carousel.addEventListener("mouseleave", () => {
+    isDown = false;
+  });
 
-  carousel.addEventListener("mousemove", e => {
+  carousel.addEventListener("mouseup", () => {
+    isDown = false;
+  });
+
+  carousel.addEventListener("mousemove", (e) => {
     if (!isDown) return;
-    const dx = e.pageX - startX;
-    carousel.scrollLeft = scrollStart - dx;
+    e.preventDefault();
+    const x = e.pageX - carousel.offsetLeft;
+    const walk = (x - startX) * 1.5;
+    carousel.scrollLeft = scrollLeft - walk;
+  });
+
+  // Touch
+  carousel.addEventListener("touchstart", (e) => {
+    startX = e.touches[0].pageX;
+    startY = e.touches[0].pageY;
+    scrollLeft = carousel.scrollLeft;
+    isHorizontal = false;
+  }, { passive: true });
+
+  carousel.addEventListener("touchmove", (e) => {
+    const x = e.touches[0].pageX;
+    const y = e.touches[0].pageY;
+
+    const diffX = Math.abs(x - startX);
+    const diffY = Math.abs(y - startY);
+
+    // Detectamos dirección dominante
+    if (!isHorizontal) {
+      if (diffX > diffY) {
+        isHorizontal = true;
+      } else {
+        return; // dejamos scroll vertical normal
+      }
+    }
+
+    if (isHorizontal) {
+      e.preventDefault();
+      const walk = (x - startX) * 1.5;
+      carousel.scrollLeft = scrollLeft - walk;
+    }
+
+  }, { passive: false });
+
+
+  /* =========================
+     EFECTO 3D AL SCROLLEAR
+  ========================== */
+
+  function updateCards() {
+    const center = window.innerWidth / 2;
+
+    cards.forEach(card => {
+      const rect = card.getBoundingClientRect();
+      const cardCenter = rect.left + rect.width / 2;
+      const distance = cardCenter - center;
+
+      const rotate = distance * 0.04;
+      const scale = 1 - Math.min(Math.abs(distance) / 1200, 0.25);
+      const opacity = 1 - Math.min(Math.abs(distance) / 800, 0.5);
+
+      card.style.transform = `rotateY(${rotate}deg) scale(${scale})`;
+      card.style.opacity = opacity;
+    });
+  }
+
+  carousel.addEventListener("scroll", updateCards);
+  window.addEventListener("resize", updateCards);
+  updateCards();
+
+
+  /* =========================
+     MODAL
+  ========================== */
+
+  const modal = document.getElementById("modal");
+  const closeBtn = document.querySelector(".close");
+
+  cards.forEach(card => {
+    card.addEventListener("click", () => {
+      modal.style.display = "flex";
+    });
+  });
+
+  closeBtn.addEventListener("click", () => {
+    modal.style.display = "none";
+  });
+
+  window.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      modal.style.display = "none";
+    }
   });
 
 });
