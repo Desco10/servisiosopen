@@ -17,12 +17,10 @@ html,body{
   background:radial-gradient(circle at top,#0a1c3a,#050914);
   color:var(--text);
   scroll-behavior:smooth;
-
-  /* LIBERAR SCROLL GLOBAL */
   height:100%;
   overflow-y:auto !important;
-  overscroll-behavior-y:contain;
-  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y:auto;
+  touch-action: pan-y;
 }
 
 /* HEADER */
@@ -75,8 +73,6 @@ header::before{
 
   animation:logoPulse 4s ease-in-out infinite;
 }
-
-/* Pulso suave */
 @keyframes logoPulse{
   0%{filter:drop-shadow(0 0 10px rgba(255,255,255,.7))}
   50%{filter:drop-shadow(0 0 28px rgba(255,255,255,.95))}
@@ -116,16 +112,15 @@ h2{text-align:center;font-size:2.2rem;margin-bottom:40px}
   gap:25px
 }
 .card{
+  min-width:260px;
   background:var(--card);
   border-radius:18px;
   overflow:hidden;
   box-shadow:0 0 20px rgba(0,0,0,.6);
   position:relative;
   backface-visibility:hidden;
-
-  /* Permite scroll vertical global mientras swipes en horizontal */
   pointer-events:auto;
-  touch-action: pan-y pinch-zoom;
+  touch-action: pan-y;
 }
 .card-media{height:200px;overflow:hidden}
 .card-media img,.card-media video{width:100%;height:100%;object-fit:cover}
@@ -185,14 +180,13 @@ h2{text-align:center;font-size:2.2rem;margin-bottom:40px}
   perspective:1200px;
   cursor:grab;
   scroll-behavior:smooth;
-  scroll-snap-type:x mandatory;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
 }
 
 .carousel::-webkit-scrollbar{display:none}
 
 .carousel .card{
-  min-width:260px;
-  scroll-snap-align:center;
   transition:transform .5s ease, filter .5s ease, opacity .5s ease;
   transform-origin:center center;
   will-change:transform;

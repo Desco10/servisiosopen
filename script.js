@@ -72,18 +72,17 @@ document.querySelectorAll('.carousel').forEach(carousel => {
 
   let isDown = false;
   let startX = 0;
+  let startY = 0;
   let scrollStart = 0;
 
   const cards = carousel.querySelectorAll('.card');
 
   function updateCenter(){
     const center = carousel.scrollLeft + carousel.offsetWidth / 2;
-    cards.forEach(card => {
+    cards.forEach(card=>{
       const cardCenter = card.offsetLeft + card.offsetWidth / 2;
       const dist = Math.abs(center - cardCenter);
-
       card.classList.remove('is-center','is-near','is-far');
-
       if(dist < 150) card.classList.add('is-center');
       else if(dist < 300) card.classList.add('is-near');
       else card.classList.add('is-far');
@@ -94,22 +93,23 @@ document.querySelectorAll('.carousel').forEach(carousel => {
   window.addEventListener('resize', updateCenter);
   setTimeout(updateCenter, 300);
 
-  /* TOUCH */
+  // TOUCH
   carousel.addEventListener("touchstart", e => {
     isDown = true;
     startX = e.touches[0].pageX;
+    startY = e.touches[0].pageY;
     scrollStart = carousel.scrollLeft;
   }, { passive: true });
 
   carousel.addEventListener("touchmove", e => {
     if (!isDown) return;
-
     const x = e.touches[0].pageX;
     const y = e.touches[0].pageY;
     const dx = x - startX;
+    const dy = y - startY;
 
-    // SOLO bloquear horizontal si el movimiento horizontal es mayor que vertical
-    if(Math.abs(dx) > Math.abs(e.touches[0].pageY - y)){
+    // Solo mover horizontal si gesto horizontal mayor que vertical
+    if(Math.abs(dx) > Math.abs(dy)){
       e.preventDefault();
       carousel.scrollLeft = scrollStart - dx;
     }
@@ -118,7 +118,7 @@ document.querySelectorAll('.carousel').forEach(carousel => {
   carousel.addEventListener("touchend", () => isDown = false);
   carousel.addEventListener("touchcancel", () => isDown = false);
 
-  /* DESKTOP */
+  // MOUSE DESKTOP
   carousel.addEventListener("mousedown", e => {
     isDown = true;
     startX = e.pageX;
