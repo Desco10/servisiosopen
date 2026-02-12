@@ -77,3 +77,37 @@ document.getElementById("toggleServicios").addEventListener("click", function() 
     ? "block" 
     : "none";
 });
+
+
+function abrirModal(el){
+  const modal=document.getElementById("modal");
+  const img=document.getElementById("modal-img");
+  const vid=document.getElementById("modal-video");
+
+  modal.style.display="flex";
+  document.body.style.overflow="hidden";
+
+  if(el.tagName==="IMG"){
+    img.src=el.src;img.style.display="block";
+    vid.style.display="none";vid.pause();
+  }else{
+    img.style.display="none";
+    vid.src=el.src;vid.style.display="block";vid.play();
+  }
+}
+function cerrarModal(){
+  modal.style.display="none";
+  document.body.style.overflow="auto";
+  modalVideo.pause();
+}
+
+
+function cerrarModal(){
+  const modal = document.getElementById("modal");
+  const modalVideo = document.getElementById("modal-video");
+  modal.style.display="none";
+  modalVideo.pause();
+  modalVideo.currentTime = 0;
+  modalVideo.src = "";
+  document.body.style.overflow="auto";
+}
