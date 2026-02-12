@@ -66,14 +66,13 @@ btn.addEventListener('click', () => {
 });
 
 /* ===============================
-   CARRUSEL SUAVE TOUCH-ONLY
-   sin bloquear scroll global
+   CARRUSEL SUAVE SIN BLOQUEAR SCROLL
 ================================ */
 document.querySelectorAll('.carousel').forEach(carousel => {
 
   let isDown = false;
-  let startX = 0;
-  let scrollStart = 0;
+  let startX;
+  let scrollStart;
 
   const cards = carousel.querySelectorAll('.card');
 
@@ -102,15 +101,20 @@ document.querySelectorAll('.carousel').forEach(carousel => {
     scrollStart = carousel.scrollLeft;
   }, { passive: true });
 
-  carousel.addEventListener("touchend", () => isDown = false);
-  carousel.addEventListener("touchcancel", () => isDown = false);
-
   carousel.addEventListener("touchmove", e => {
     if (!isDown) return;
     const x = e.touches[0].pageX;
-    const walk = (x - startX) * 1.1;
-    carousel.scrollLeft = scrollStart - walk;
-  }, { passive: true });
+    const walk = x - startX;
+
+    // SOLO horizontal, no bloquear scroll vertical
+    if(Math.abs(walk) > Math.abs(e.touches[0].pageY - e.touches[0].pageY)){
+      e.preventDefault();
+      carousel.scrollLeft = scrollStart - walk;
+    }
+  }, { passive: false });
+
+  carousel.addEventListener("touchend", () => isDown = false);
+  carousel.addEventListener("touchcancel", () => isDown = false);
 
   /* DESKTOP */
   carousel.addEventListener("mousedown", e => {
@@ -125,7 +129,7 @@ document.querySelectorAll('.carousel').forEach(carousel => {
   carousel.addEventListener("mousemove", e => {
     if (!isDown) return;
     const x = e.pageX;
-    const walk = (x - startX) * 1.1;
+    const walk = x - startX;
     carousel.scrollLeft = scrollStart - walk;
   });
 });
