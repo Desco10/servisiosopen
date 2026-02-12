@@ -71,14 +71,14 @@ btn.addEventListener('click', () => {
 document.querySelectorAll('.carousel').forEach(carousel => {
 
   let isDown = false;
-  let startX;
-  let scrollStart;
+  let startX = 0;
+  let scrollStart = 0;
 
   const cards = carousel.querySelectorAll('.card');
 
   function updateCenter(){
     const center = carousel.scrollLeft + carousel.offsetWidth / 2;
-    cards.forEach(card=>{
+    cards.forEach(card => {
       const cardCenter = card.offsetLeft + card.offsetWidth / 2;
       const dist = Math.abs(center - cardCenter);
 
@@ -103,13 +103,15 @@ document.querySelectorAll('.carousel').forEach(carousel => {
 
   carousel.addEventListener("touchmove", e => {
     if (!isDown) return;
-    const x = e.touches[0].pageX;
-    const walk = x - startX;
 
-    // SOLO horizontal, no bloquear scroll vertical
-    if(Math.abs(walk) > Math.abs(e.touches[0].pageY - e.touches[0].pageY)){
+    const x = e.touches[0].pageX;
+    const y = e.touches[0].pageY;
+    const dx = x - startX;
+
+    // SOLO bloquear horizontal si el movimiento horizontal es mayor que vertical
+    if(Math.abs(dx) > Math.abs(e.touches[0].pageY - y)){
       e.preventDefault();
-      carousel.scrollLeft = scrollStart - walk;
+      carousel.scrollLeft = scrollStart - dx;
     }
   }, { passive: false });
 
@@ -128,8 +130,7 @@ document.querySelectorAll('.carousel').forEach(carousel => {
 
   carousel.addEventListener("mousemove", e => {
     if (!isDown) return;
-    const x = e.pageX;
-    const walk = x - startX;
-    carousel.scrollLeft = scrollStart - walk;
+    const dx = e.pageX - startX;
+    carousel.scrollLeft = scrollStart - dx;
   });
 });
