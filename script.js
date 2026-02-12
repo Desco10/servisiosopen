@@ -111,3 +111,68 @@ function cerrarModal(){
   modalVideo.src = "";
   document.body.style.overflow="auto";
 }
+
+
+
+/* ===============================
+   CARRUSEL TOUCH-ONLY PREMIUM
+   sin conflicto ni titileo
+================================ */
+
+document.querySelectorAll('.carousel').forEach(carousel => {
+  const cards = carousel.querySelectorAll('.card');
+
+  function updateCenter(){
+    const center = carousel.scrollLeft + carousel.offsetWidth / 2;
+
+    cards.forEach(card=>{
+      const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+      const dist = Math.abs(center - cardCenter);
+
+      card.classList.remove('is-center','is-near','is-far');
+
+      if(dist < 150) card.classList.add('is-center');
+      else if(dist < 300) card.classList.add('is-near');
+      else card.classList.add('is-far');
+    });
+  }
+
+  carousel.addEventListener('scroll', updateCenter, { passive:true });
+  window.addEventListener('resize', updateCenter);
+  setTimeout(updateCenter, 300);
+
+
+  // TOUCH
+  carousel.addEventListener("touchstart", e => {
+    isDown = true;
+    startX = e.touches[0].pageX;
+    scrollLeft = carousel.scrollLeft;
+  }, { passive: true });
+
+  carousel.addEventListener("touchend", () => isDown = false);
+  carousel.addEventListener("touchcancel", () => isDown = false);
+
+  carousel.addEventListener("touchmove", e => {
+    if (!isDown) return;
+    const x = e.touches[0].pageX;
+    const walk = (x - startX) * 1.2;
+    carousel.scrollLeft = scrollLeft - walk;
+  }, { passive: true });
+
+  // DESKTOP
+  carousel.addEventListener("mousedown", e => {
+    isDown = true;
+    startX = e.pageX;
+    scrollLeft = carousel.scrollLeft;
+  });
+
+  carousel.addEventListener("mouseup", () => isDown = false);
+  carousel.addEventListener("mouseleave", () => isDown = false);
+
+  carousel.addEventListener("mousemove", e => {
+    if (!isDown) return;
+    const x = e.pageX;
+    const walk = (x - startX) * 1.1;
+    carousel.scrollLeft = scrollLeft - walk;
+  });
+});
