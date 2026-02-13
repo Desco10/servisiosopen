@@ -108,6 +108,7 @@ section{
   max-width:1200px;
   margin:auto;
   padding:80px 20px;
+  scroll-margin-top: 90px;
 }
 
 h2{
@@ -459,4 +460,19 @@ footer{
   color:var(--accent);
   margin:0 10px;
   font-size:22px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  touch-action: manipulation;
+}
+
+
+* {
+  -webkit-tap-highlight-color: transparent;
 }
