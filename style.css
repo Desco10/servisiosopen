@@ -249,25 +249,38 @@ h2{
 
 .card{
   min-width:260px;
-  flex:0 0 auto;
+  max-width:260px;   /* 👈 evita que se ensanche */
+  flex:0 0 260px;
+
   background:var(--card);
   border-radius:18px;
   overflow:hidden;
   position:relative;
 
-  box-shadow:0 0 20px rgba(0,0,0,.6);
+  display:flex;
+  flex-direction:column;
+
+  box-shadow:
+    0 10px 25px rgba(0,0,0,.45),
+    0 0 0 1px rgba(255,255,255,.04);
+
   backface-visibility:hidden;
   transform-style:preserve-3d;
   will-change:transform;
 
   scroll-snap-align:center;
 
-  transition:transform .5s ease, filter .5s ease, opacity .5s ease;
+  transition:
+  transform .45s ease,
+  filter .45s ease,
+  opacity .45s ease,
+  box-shadow .45s ease;
 }
 
 .card-media{
-  height:200px;
+  height:190px;
   overflow:hidden;
+  flex-shrink:0;
 }
 
 .card-media img,
@@ -275,23 +288,32 @@ h2{
   width:100%;
   height:100%;
   object-fit:cover;
-  cursor:pointer;
+  display:block;
 }
+
+.card-media img.web{
+  object-fit:contain;
+  background:#fff;
+  padding:6px;
+}
+
 
 .card-content{
-  padding:15px;
+  padding:16px;
   display:flex;
   flex-direction:column;
-}
-
-.card-content h3{
-  margin:0 0 8px;
+  gap:8px;
+  flex:1;
 }
 
 .card-content p{
   color:var(--muted);
   flex-grow:1;
+
+  overflow-wrap:break-word;
+  word-break:break-word;
 }
+
 
 /* BOTÓN VER */
 
@@ -315,22 +337,34 @@ h2{
    EFECTO 3D
 ===================================================== */
 
+.card{
+  transform:scale(.86);
+  opacity:.45;
+  filter:blur(1px) brightness(.7);
+}
+
 .card.is-active{
-  transform:scale(1.15) rotateY(0deg);
+  transform:scale(1.05) rotateY(0deg);
   opacity:1;
+  filter:none;
   z-index:5;
+
+  box-shadow:
+    0 25px 60px rgba(0,0,0,.65),
+    0 0 35px rgba(0,0,0,.45),
+    0 0 0 1px rgba(255,255,255,.06);
 }
 
 .card.is-left{
-  transform:scale(.9) rotateY(25deg);
-  opacity:.6;
-  filter:blur(2px) brightness(.8);
+  transform:scale(.92) rotateY(22deg);
+  opacity:.7;
+  filter:blur(.5px) brightness(.85);
 }
 
 .card.is-right{
-  transform:scale(.9) rotateY(-25deg);
-  opacity:.6;
-  filter:blur(2px) brightness(.8);
+  transform:scale(.92) rotateY(-22deg);
+  opacity:.7;
+  filter:blur(.5px) brightness(.85);
 }
 
 /* BRILLO CENTRAL */
@@ -340,15 +374,29 @@ h2{
   position:absolute;
   inset:0;
   border-radius:18px;
-  background:linear-gradient(120deg,transparent 20%,rgba(255,255,255,.35),transparent 80%);
-  animation:shine 2.8s infinite;
+
+  background:
+  linear-gradient(110deg,
+  transparent 20%,
+  rgba(255,255,255,.22) 45%,
+  rgba(255,255,255,.35) 50%,
+  rgba(255,255,255,.22) 55%,
+  transparent 80%);
+
+  animation:shine 3.5s infinite;
   pointer-events:none;
+  mix-blend-mode:overlay;
 }
 
 @keyframes shine{
-  0%{transform:translateX(-120%)}
-  60%{transform:translateX(120%)}
-  100%{transform:translateX(120%)}
+  0%{transform:translateX(-140%)}
+  55%{transform:translateX(140%)}
+  100%{transform:translateX(140%)}
+}
+
+
+.carousel{
+  perspective:1400px;
 }
 
 /* =====================================================
