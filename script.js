@@ -1,200 +1,227 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+  /* =====================================================
+     CARRUSEL 3D PREMIUM (UNIFICADO Y OPTIMIZADO)
+  ===================================================== */
+
   const carousels = document.querySelectorAll(".carousel");
 
-  function updateCards() {
-    carousels.forEach(carousel => {
+  carousels.forEach(carousel => {
 
-      const center = window.innerWidth / 2;
+    const cards = carousel.querySelectorAll(".card");
+    if (!cards.length) return;
 
-      carousel.querySelectorAll(".card").forEach(card => {
-        const rect = card.getBoundingClientRect();
-        const cardCenter = rect.left + rect.width / 2;
+    function updateCarousel() {
+
+      const rect = carousel.getBoundingClientRect();
+      const center = rect.left + rect.width / 2;
+
+      cards.forEach(card => {
+
+        const cardRect = card.getBoundingClientRect();
+        const cardCenter = cardRect.left + cardRect.width / 2;
         const distance = cardCenter - center;
 
-        card.classList.remove("is-center","is-near","is-far");
+        card.classList.remove("is-active", "is-left", "is-right");
 
-        if (Math.abs(distance) < 120) {
-          card.classList.add("is-center");
-        } else if (Math.abs(distance) < 350) {
-          card.classList.add("is-near");
+        if (Math.abs(distance) < cardRect.width / 2) {
+          card.classList.add("is-active");
+        } else if (distance < 0) {
+          card.classList.add("is-left");
         } else {
-          card.classList.add("is-far");
+          card.classList.add("is-right");
         }
+
       });
+    }
 
-    });
-  }
+    let ticking = false;
 
-  carousels.forEach(carousel => {
-    carousel.addEventListener("scroll", updateCards);
-  });
-
-  window.addEventListener("resize", updateCards);
-  updateCards();
-
-});
-
-
-//carrucel premiun 
-
-document.querySelectorAll('.carousel').forEach(carousel => {
-
-  const cards = carousel.querySelectorAll('.card');
-
-  function update(){
-    const rect = carousel.getBoundingClientRect();
-    const center = rect.left + rect.width / 2;
-
-    cards.forEach(card => {
-
-      const cardRect = card.getBoundingClientRect();
-      const cardCenter = cardRect.left + cardRect.width / 2;
-      const distance = cardCenter - center;
-
-      card.classList.remove('is-active','is-left','is-right');
-
-      if(Math.abs(distance) < cardRect.width / 2){
-        card.classList.add('is-active');
-      } else if(distance < 0){
-        card.classList.add('is-left');
-      } else {
-        card.classList.add('is-right');
+    function requestUpdate() {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          updateCarousel();
+          ticking = false;
+        });
+        ticking = true;
       }
+    }
 
+    updateCarousel();
+    carousel.addEventListener("scroll", requestUpdate);
+    window.addEventListener("resize", requestUpdate);
+
+  });
+
+
+  /* =====================================================
+     MODAL PREMIUM
+  ===================================================== */
+
+  const modal = document.getElementById("modal");
+  const modalImg = document.getElementById("modal-img");
+  const modalVideo = document.getElementById("modal-video");
+  const closeBtn = document.querySelector(".cerrar");
+
+  function openModal(element) {
+
+    if (!modal) return;
+
+    // Pausar todos los videos del carrusel
+    document.querySelectorAll(".card video").forEach(v => v.pause());
+
+    modal.classList.add("activo");
+    modal.style.display = "flex";
+    document.body.style.overflow = "hidden";
+
+    modalImg.style.display = "none";
+    modalVideo.style.display = "none";
+
+    if (element.tagName === "IMG") {
+      modalImg.src = element.src;
+      modalImg.style.display = "block";
+    }
+
+    if (element.tagName === "VIDEO") {
+      modalVideo.src = element.currentSrc || element.src;
+      modalVideo.currentTime = 0;
+      modalVideo.style.display = "block";
+      modalVideo.play();
+    }
+
+  }
+
+  function closeModal() {
+
+    if (!modal) return;
+
+    modalVideo.pause();
+    modalVideo.currentTime = 0;
+    modalVideo.removeAttribute("src");
+    modalVideo.load();
+
+    modalImg.removeAttribute("src");
+
+    modal.classList.remove("activo");
+    modal.style.display = "none";
+    document.body.style.overflow = "auto";
+
+  }
+
+  // Delegación de eventos para abrir modal
+  document.addEventListener("click", (e) => {
+
+    const media = e.target.closest(".card-media img, .card-media video");
+    if (media) {
+      openModal(media);
+    }
+
+  });
+
+  // Cerrar con botón
+  if (closeBtn) {
+    closeBtn.addEventListener("click", closeModal);
+  }
+
+  // Cerrar clic fuera
+  if (modal) {
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        closeModal();
+      }
     });
   }
 
-  update();
-
-  carousel.addEventListener('scroll', () => {
-    requestAnimationFrame(update);
+  // Cerrar con ESC
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal.classList.contains("activo")) {
+      closeModal();
+    }
   });
 
-  window.addEventListener('resize', update);
 
-});
-
-
-
- 
-//servicios premiun
-
-document.addEventListener("DOMContentLoaded", function(){
+  /* =====================================================
+     SERVICIOS PREMIUM
+  ===================================================== */
 
   const btn = document.getElementById("toggleServicios");
   const contenido = document.getElementById("contenidoServicios");
 
-  let abierto = false;
-  let inactivityTimer;
-  const tiempoInactividad = 10000;
+  if (btn && contenido) {
 
-  function abrir(){
-    contenido.classList.add("activo");
-    btn.classList.add("activo");
-    btn.textContent = "Ocultar Servicios";
-    abierto = true;
-    reiniciarInactividad();
-  }
+    let abierto = false;
+    let inactivityTimer;
+    const tiempoInactividad = 10000;
 
-  function cerrar(){
-    contenido.classList.remove("activo");
-    btn.classList.remove("activo");
-    btn.textContent = "Ver Servicios";
-    abierto = false;
-  }
-
-  function toggle(){
-    abierto ? cerrar() : abrir();
-  }
-
-  function reiniciarInactividad(){
-    clearTimeout(inactivityTimer);
-    inactivityTimer = setTimeout(() => {
-      if(abierto) cerrar();
-    }, tiempoInactividad);
-  }
-
-  btn.addEventListener("click", toggle);
-
-  window.addEventListener("scroll", function(){
-    if(!abierto) return;
-
-    const scrollActual = window.scrollY;
-    const alturaTotal = document.body.scrollHeight - window.innerHeight;
-
-    if(scrollActual > alturaTotal * 0.65){
-      cerrar();
+    function abrir() {
+      contenido.classList.add("activo");
+      btn.classList.add("activo");
+      btn.textContent = "Ocultar Servicios";
+      btn.setAttribute("aria-expanded", "true");
+      abierto = true;
+      reiniciarInactividad();
     }
 
-    reiniciarInactividad();
+    function cerrar() {
+      contenido.classList.remove("activo");
+      btn.classList.remove("activo");
+      btn.textContent = "Ver Servicios";
+      btn.setAttribute("aria-expanded", "false");
+      abierto = false;
+    }
+
+    function toggle() {
+      abierto ? cerrar() : abrir();
+    }
+
+    function reiniciarInactividad() {
+      clearTimeout(inactivityTimer);
+      inactivityTimer = setTimeout(() => {
+        if (abierto) cerrar();
+      }, tiempoInactividad);
+    }
+
+    btn.addEventListener("click", toggle);
+
+    window.addEventListener("scroll", () => {
+      if (!abierto) return;
+
+      const scrollActual = window.scrollY;
+      const alturaTotal = document.body.scrollHeight - window.innerHeight;
+
+      if (scrollActual > alturaTotal * 0.65) {
+        cerrar();
+      }
+
+      reiniciarInactividad();
+    });
+
+    ["mousemove", "keydown", "touchstart"].forEach(evt => {
+      window.addEventListener(evt, reiniciarInactividad);
+    });
+
+  }
+
+
+  /* =====================================================
+     NAVEGACIÓN SUAVE
+  ===================================================== */
+
+  document.querySelectorAll("nav a").forEach(link => {
+
+    link.addEventListener("click", function (e) {
+
+      const target = document.querySelector(this.getAttribute("href"));
+      if (!target) return;
+
+      e.preventDefault();
+
+      target.scrollIntoView({
+        behavior: "smooth"
+      });
+
+    });
+
   });
 
-  window.addEventListener("mousemove", reiniciarInactividad);
-  window.addEventListener("keydown", reiniciarInactividad);
-  window.addEventListener("touchstart", reiniciarInactividad);
-
 });
-
-
-//modal
-function abrirModal(elemento) {
-  const modal = document.getElementById("modal");
-  const modalImg = document.getElementById("modal-img");
-  const modalVideo = document.getElementById("modal-video");
-
-  // 🔥 Pausar TODOS los videos del carrusel
-  document.querySelectorAll(".card video").forEach(v => {
-    v.pause();
-  });
-
-  // Reset visual
-  modalImg.style.display = "none";
-  modalVideo.style.display = "none";
-
-  modal.style.display = "flex";
-  modal.classList.add("activo");
-
-  if (elemento.tagName === "IMG") {
-    modalImg.src = elemento.src;
-    modalImg.style.display = "block";
-  }
-
-  if (elemento.tagName === "VIDEO") {
-    modalVideo.src = elemento.currentSrc || elemento.src;
-    modalVideo.style.display = "block";
-    modalVideo.currentTime = 0;
-    modalVideo.play();
-  }
-
-  document.body.style.overflow = "hidden";
-}
-
-function cerrarModal() {
-  const modal = document.getElementById("modal");
-  const modalVideo = document.getElementById("modal-video");
-  const modalImg = document.getElementById("modal-img");
-
-  // 🔥 STOP REAL
-  modalVideo.pause();
-  modalVideo.currentTime = 0;
-  modalVideo.removeAttribute("src");
-  modalVideo.load();
-
-  modalImg.removeAttribute("src");
-
-  modal.classList.remove("activo");
-  modal.style.display = "none";
-
-  document.body.style.overflow = "auto";
-}
-
-
-//modal cerrar afeura 
-document.getElementById("modal").addEventListener("click", function(e) {
-  if (e.target.id === "modal") {
-    cerrarModal();
-  }
-});
-
-
