@@ -200,15 +200,23 @@ document.getElementById("modal").addEventListener("click", function(e) {
 
 
 
+
 document.querySelectorAll('nav a').forEach(link => {
   link.addEventListener('click', function(e) {
     e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
+    const id = this.getAttribute('href');
+    const target = document.querySelector(id);
+
     if (target) {
-      target.scrollIntoView({
+      const yOffset = -90; // altura del header
+      const y = target.getBoundingClientRect().top + window.pageYOffset + yOffset;
+
+      window.scrollTo({
+        top: y,
         behavior: 'smooth'
       });
     }
   });
 });
+
 

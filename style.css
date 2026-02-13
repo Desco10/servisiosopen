@@ -26,13 +26,15 @@ html,body{
 /* ================= HEADER ================= */
 
 header{
-  min-height:90vh;
+  min-height:100vh;
+  min-height:100svh;
   background:url(https://img1.wsimg.com/isteam/ip/f04a3b85-a842-4389-9537-7d26d92e9243/programacion-web.jpg) center/cover no-repeat;
   position:relative;
   display:flex;
   align-items:center;
   justify-content:center;
 }
+
 
 header::before{
   content:"";
