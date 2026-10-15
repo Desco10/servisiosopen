@@ -3,7 +3,18 @@ const WORKS = {
   web: [
     {img:"img/tendero y carrito.jfif", t:"Tarjeta digital y página web", d:"Tarjeta digital con página para ver el catálogo e información de la empresa.", url:"https://descocard.netlify.app/"},
     {img:"img/descomanos.png", t:"Catálogo web para empresa", d:"Catálogo en línea fácil de navegar desde el celular.", url:"https://catalogodesco.netlify.app/"},
-    {img:"img/tarjdes.png", t:"Tarjeta digital con ventas", d:"Tarjeta digital con plataforma de ventas integrada.", url:"https://descoapp.netlify.app/"}
+    {img:"img/tarjdes.png", t:"Tarjeta digital con ventas", d:"Tarjeta digital con plataforma de ventas integrada.", url:"https://descoapp.netlify.app/"},
+    {img:"img/desco7.png", t:"Catalogo digital con página web", d:"Sitio web , digital con página para ver el catálogo e información de la empresa.", url:"https://desco2026.netlify.app/"},
+    {img:"img/revistalogo.png", t:"Sitio web para empresa", d:"Plataforma digital para comparar desde WhatsApp.", url:"https://revistalogo.netlify.app/"},
+    /*{img:"img/tarjdes.png", t:"Tarjeta digital con ventas", d:"Tarjeta digital con plataforma de ventas integrada.", url:"https://descoapp.netlify.app/"}*/
+
+
+
+
+
+
+
+
   ],
   video: [
     "Todos los días empiezo igual, un tinto y mi (1).mp4","BETY DESCOAP SE DICE DE MI .mp4","El texto del párrafo.mp4",
@@ -18,15 +29,16 @@ const WORKS = {
     {img:"img/3.jpg", t:"Flyer Desco", d:"Pieza publicitaria para redes."},
     {img:"img/Infografía Descuentos Supermercado Moderno Rojo y Amarillo (2).jpg", t:"Infografía de descuentos", d:"Infografía para Desco."},
     {img:"img/prom.jpg", t:"Flyer promocional", d:"Pieza publicitaria para Desco."},
-    {img:"img/QUE RICAS PAPAS (5).png", t:"Flyer de muestra", d:"Ejemplo de diseño publicitario."}
+    {img:"img/QUE RICAS PAPAS (5).png", t:"Flyer de muestra", d:"Invitacion digital para matrimonio."}
   ],
-  /* Sube tus invitaciones a img/ con estos nombres (formato vertical 9:16) o cambia los nombres */
+  /* Cada invitación es una URL real (tu página de Netlify). Pega aquí los enlaces.
+     Con url:"" se muestra un marco de ejemplo. */
   invites: [
-    {img:"img/invitacion-boda.jpg", t:"Boda", d:"Elegante, con música y mapa."},
-    {img:"img/invitacion-xv.jpg", t:"Quinceaños", d:"Con cuenta regresiva y galería."},
-    {img:"img/invitacion-cumple.jpg", t:"Cumpleaños", d:"Colorida y animada."},
-    {img:"img/invitacion-bautizo.jpg", t:"Bautizo", d:"Suave, con confirmación por WhatsApp."},
-    {img:"img/invitacion-empresa.jpg", t:"Evento de empresa", d:"Formal, con registro de asistentes."}
+    {url:"https://joseynatalia.netlify.app/", t:"Invitación de boda", d:"Revisa como se ve nuestra invitacion de boda."},
+    {url:"https://scarlettmariana.netlify.app/", t:"Invitación de quinceañera", d:"Elegante, con música y mapa."},
+    {url:"https://seninvitacion.netlify.app/", t:"Quinceaños", d:"Con cuenta regresiva y galería."},
+    {url:"https://dannavalentina.netlify.app/", t:"Invitación de quinceañera", d:"Colorida y animada."},
+    /*{url:"", t:"Bautizo", d:"Suave, con confirmación por WhatsApp."}*/
   ]
 };
 
@@ -39,18 +51,24 @@ function card(w){
     <div class="card-media" data-src="${esc(w.vid||w.img)}" data-type="${w.vid?"video":"img"}">${media}</div>
     <div class="card-body"><h4>${w.t}</h4><p>${w.d}</p>${w.url?`<a href="${w.url}" target="_blank" rel="noopener">Ver página</a>`:""}</div></article>`;
 }
-for (const [id,list] of Object.entries(WORKS)) {
-  const el = document.getElementById(id==="invites"?"invites":id);
-  if (el) el.innerHTML = list.map(card).join("");
+function invite(w){
+  const inner = w.url
+    ? `<iframe src="${esc(w.url)}" title="${esc(w.t)}" loading="lazy" tabindex="-1" scrolling="no" sandbox="allow-scripts allow-same-origin"></iframe><a class="open" href="${esc(w.url)}" target="_blank" rel="noopener" aria-label="Abrir invitación ${esc(w.t)}"><span>Abrir invitación</span></a>`
+    : `<div class="ph">${w.t}<br>Tu invitación aquí</div>`;
+  return `<article class="card"><div class="frame">${inner}</div>
+    <div class="card-body"><h4>${w.t}</h4><p>${w.d}</p>${w.url?`<a class="btn-open" href="${esc(w.url)}" target="_blank" rel="noopener">Ver invitación</a>`:""}</div></article>`;
 }
-/* Si una imagen no existe, muestra un marco elegante en vez de un icono roto */
-document.querySelectorAll("#invites img").forEach(img=>{
-  img.addEventListener("error",()=>{
-    const m = img.parentElement; m.dataset.src=""; 
-    m.innerHTML = `<div class="ph">${img.alt}<br>Tu diseño aquí</div>`;
+for (const [id,list] of Object.entries(WORKS)) {
+  const el = document.getElementById(id);
+  if (el) el.innerHTML = list.map(id==="invites"?invite:card).join("");
+}
+/* Ajusta cada vista previa al ancho del marco del celular */
+function fitFrames(){
+  document.querySelectorAll(".frame iframe").forEach(f=>{
+    f.style.transform = `scale(${f.parentElement.clientWidth/390})`;
   });
-});
-
+}
+fitFrames(); addEventListener("resize",fitFrames); addEventListener("load",fitFrames);
 /* ====== CARRUSELES: flechas + arrastre con mouse ====== */
 document.querySelectorAll(".showcase").forEach(sc=>{
   const track = sc.querySelector(".track");

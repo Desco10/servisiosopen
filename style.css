@@ -86,14 +86,17 @@ h2{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:600;letter-spacing:-.02em;text
 .phones .card-media{aspect-ratio:9/16;border-radius:26px}
 .phones .card-body{padding:14px 8px 8px;text-align:center}
 .phones .card:hover{border-color:var(--champagne);box-shadow:0 20px 50px rgba(0,0,0,.5),0 0 40px rgba(232,211,162,.15)}
-.ph{display:grid;place-items:center;height:100%;padding:20px;text-align:center;color:var(--champagne);font-family:Sora;background:radial-gradient(circle at 50% 30%,rgba(232,211,162,.25),#0d1530 70%)}
 .inv-feats{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
 .inv-feats span{padding:10px 20px;border-radius:99px;border:1px solid rgba(232,211,162,.3);color:#e9ddc0;font-size:.9rem}
 .inv-feats i{color:var(--champagne);margin-right:8px}
 
 /* CONTACTO / FOOTER */
 .contact{text-align:center;padding-bottom:110px}
-footer{text-align:center;padding:36px 20px;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}
+footer{position:relative;overflow:hidden;text-align:center;padding:90px 20px 40px;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}
+.foot-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.9}
+.foot-shade{position:absolute;inset:0;background:linear-gradient(180deg,var(--ink),rgba(4,7,15,.35) 55%,rgba(4,7,15,.7))}
+.foot-inner{position:relative}
+footer h3{color:var(--text);font-size:clamp(1.3rem,3vw,2rem);max-width:640px;margin:0 auto 24px;font-weight:600}
 .redes a{font-size:22px;margin:0 10px;text-decoration:none;transition:color .25s}
 .redes a:hover{color:var(--cyan)}
 
@@ -114,3 +117,27 @@ footer{text-align:center;padding:36px 20px;border-top:1px solid var(--line);colo
   .arrows{display:none}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* VISTA PREVIA DE INVITACIONES (sin interacción) */
+.frame{position:relative;aspect-ratio:9/16;border-radius:26px;overflow:hidden;background:#0d1530}
+.frame iframe{position:absolute;top:0;left:0;width:390px;height:693px;border:0;transform-origin:0 0;pointer-events:none}
+.frame a.open{position:absolute;inset:0;z-index:2;display:flex;align-items:flex-end;justify-content:center;padding:16px;background:linear-gradient(180deg,transparent 60%,rgba(4,7,15,.75));opacity:0;transition:opacity .3s}
+.frame:hover a.open,.frame a.open:focus-visible{opacity:1}
+.frame a.open span{padding:9px 18px;border-radius:99px;background:var(--champagne);color:var(--ink);font-weight:600;font-size:.85rem}
+.ph{display:grid;place-items:center;height:100%;padding:20px;text-align:center;color:var(--champagne);font-family:Sora;background:radial-gradient(circle at 50% 30%,rgba(232,211,162,.25),#0d1530 70%)}
+.phones .card-body .btn-open{display:inline-block;margin-top:2px;padding:7px 16px;border:1px solid rgba(232,211,162,.5);border-radius:99px;color:var(--champagne);text-decoration:none;font-size:.82rem;font-weight:600}
+.phones .card-body .btn-open:hover{background:var(--champagne);color:var(--ink)}
+@media(hover:none){.frame a.open{opacity:1}}
+
+/* FLECHAS DEL CARRUSEL (sin depender de Font Awesome) */
+.arrows button{display:grid;place-items:center;padding:0}
+.arrows button i{display:none}
+.arrows button::before{content:"";width:9px;height:9px;border-left:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateX(2px) rotate(45deg)}
+.arrows button[data-dir="1"]::before{transform:translateX(-2px) rotate(-135deg)}
+
+/* TARJETAS DE INVITACIÓN: botones y textos alineados */
+.phones .card{display:flex;flex-direction:column}
+.phones .card-body{flex:1;display:flex;flex-direction:column;align-items:center}
+.phones .card-body h4{min-height:2.4em;display:flex;align-items:center;justify-content:center}
+.phones .card-body p{flex-grow:1}
+.phones .card-body .btn-open{margin-top:auto}
