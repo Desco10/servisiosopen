@@ -1,440 +1,116 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- SEO Básico -->
-  <title>Deesa-Dev - Portafolio Digital en Diseño y Marketing</title>
-  <meta name="description" content="Portafolio profesional en diseño web, marketing digital y creación de contenido. Servicios para emprendedores, empresas y profesionales que buscan destacar en el mundo digital.">
-  <meta name="keywords" content="Deesa-Dev, diseño web, marketing digital, publicidad, portafolio digital, branding, videos publicitarios, servicios digitales">
-  <meta name="author" content="Deesa -Dev Team">
-
-  <!-- Open Graph (para Facebook, LinkedIn, WhatsApp) -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://deesadev.netlify.app/">
-  <meta property="og:title" content="Deesa -Dev - Portafolio Digital en Diseño y Marketing">
-  <meta property="og:description" content="Conoce nuestros trabajos en diseño web, publicidad y marketing digital. Soluciones para emprendedores, empresas y marcas.">
-  <meta property="og:image" content="https://deesadev.netlify.app/img/DESCO.jpg">
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content="https://deesadev.netlify.app/">
-  <meta name="twitter:title" content="Deesa -Dev - Portafolio Digital en Diseño y Marketing">
-  <meta name="twitter:description" content="Conoce nuestros servicios en diseño web, publicidad y marketing digital.">
-  <meta name="twitter:image" content="https://deesadev.netlify.app/img/DESCO.jpg">
-
-  <!-- Favicon -->
-  <link rel="icon" href="https://deesadev.netlify.app/img/DESCO.jpg" type="image/png">
-  <link rel="apple-touch-icon" sizes="180x180" href="https://deesadev.netlify.app/img/DESCO.jpg">
-  <link rel="icon" sizes="192x192" href="https://deesadev.netlify.app/img/DESCO.jpg">
-
-  <!-- Font Awesome para íconos -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Deesa-Dev - Portafolio Digital en Diseño y Marketing</title>
+<meta name="description" content="Diseño web, marketing digital, video publicitario e invitaciones digitales para emprendedores y empresas.">
+<meta name="keywords" content="Deesa-Dev, diseño web, marketing digital, invitaciones digitales, branding, videos publicitarios">
+<meta name="author" content="Deesa-Dev Team">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://deesadev.netlify.app/">
+<meta property="og:title" content="Deesa-Dev - Portafolio Digital en Diseño y Marketing">
+<meta property="og:description" content="Diseño web, publicidad, video e invitaciones digitales para marcas que quieren destacar.">
+<meta property="og:image" content="https://deesadev.netlify.app/img/DESCO.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="https://deesadev.netlify.app/img/DESCO.jpg">
+<link rel="apple-touch-icon" href="https://deesadev.netlify.app/img/DESCO.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<header class="header">
-  <!-- Logo encima -->
-  
-  <img src="img/Deesasin.png" alt="flotante" class="header-flotante">
+<nav class="nav">
+  <a href="#inicio" class="brand"><img src="img/Deesasin.png" alt="Deesa-Dev"></a>
+  <div class="links">
+    <a href="#servicios">Servicios</a>
+    <a href="#trabajos">Trabajos</a>
+    <a href="#invitaciones">Invitaciones</a>
+    <a href="#contacto" class="cta-nav">Contacto</a>
+  </div>
+</nav>
 
-  <!-- Capa de contenido -->
-  <div class="overlay">
-    <h1>Portafolio Digital</h1>
-    <p>Diseño Web | Marketing Digital | Creación de Contenido</p>
+<header id="inicio" class="hero">
+  <!-- Pon aquí tu video: videos/fondo.mp4 (corto, 10-20 s, menos de 8 MB, sin audio) -->
+  <video class="hero-video" autoplay muted loop playsinline poster="img/DESCO.jpg">
+    <source src="videos/fondo.mp4" type="video/mp4">
+  </video>
+  <canvas id="fx"></canvas>
+  <div class="hero-shade"></div>
+  <div class="hero-inner">
+    <h1>Tu marca, lista para<br>el mundo digital.</h1>
+    <p>Páginas web, publicidad, video e invitaciones digitales hechas a la medida de tu negocio.</p>
+    <div class="hero-actions">
+      <a href="#trabajos" class="btn btn-primary">Ver trabajos</a>
+      <a href="https://wa.me/573246030396?text=Hola,%20quiero%20informacion%20sobre%20tus%20servicios" target="_blank" class="btn btn-ghost"><i class="fab fa-whatsapp"></i> Escribir por WhatsApp</a>
+    </div>
+  </div>
+  <div class="stats">
+    <div><b>+8</b><span>videos publicitarios</span></div>
+    <div><b>+10</b><span>piezas gráficas</span></div>
+    <div><b>3</b><span>sitios y catálogos web</span></div>
   </div>
 </header>
 
-
-
-<nav>
-  <a href="#servicios">Servicios</a>
-  <a href="#trabajos">Trabajos</a>
-  <a href="#contacto">Contacto</a>
-</nav>
-
-<section id="servicios" class="servicios">
-  <h2>Portafolio de Servicios  DEESA-DEV </h2>
-  <button id="toggleServicios" class="btn-servicios">
-    Ver Servicios
-  </button>
-  <div id="contenidoServicios" class="contenido-servicios">
-  
-<h3> Diseño y Desarrollo Web </h3>
-
-<li>Páginas web modernas y responsivas </li>
-<P>Creamos sitios web atractivos, adaptados a cualquier dispositivo (celulares, tablets y PC).</P>
-
-<LI>Tiendas online y catálogos digitales</LI>
-<P>Soluciones para vender y mostrar tus productos de manera profesional.</P>
-
-<h3>Landing Pages efectivas</h3>
-Páginas optimizadas para captar clientes, generar ventas o contactos inmediatos.
-
-<h3>Optimización SEO básica </h3>
-<li>Configuración para que tu web sea más visible en Google y aumente tu alcance.</li>
-
- <h3>Publicidad y Marketing Digital </h3>
-
-<li>Facebook Ads & Instagram Ads</li>
-Campañas personalizadas para atraer más clientes y aumentar ventas.
-
-<li>Google Ads</li>
-Anuncios en el buscador de Google para que tus clientes te encuentren primero.
-
-<li>Gestión de redes sociales</li>
-Creación de contenido, estrategias y publicaciones para fortalecer tu marca.
-
-<li>Email Marketing básico </li>
-Campañas de correos para fidelizar clientes y aumentar conversiones.
-
-<h3> Diseño Gráfico y Branding </h3>
-
-<li>Diseño de logos</li>
-Identidades visuales únicas y profesionales para tu marca.
-
-<h3>Manual de identidad básica</h3>
-Colores, tipografías y lineamientos para que tu marca sea coherente y sólida.
-
-<li>Tarjetas digitales y presentaciones interactivas</li>
-Cartas de presentación modernas listas para compartir en WhatsApp y correo.
-
-<li>Material publicitario</li>
-Flyers, banners y piezas gráficas para redes sociales e impresos.
-
-<h3> Creación de Contenido Multimedia </h3>
-
-<li>Videos publicitarios y reels</li>
-Contenido dinámico para redes sociales y campañas de ventas.
-
-<li>Animaciones y motion graphics simples</li>
-Para darle más impacto a tus publicaciones y anuncios.
-
-<li>Edición de video profesional básica</li>
-Videos claros, atractivos y con la esencia de tu negocio.
-
-<h1> Servicios Complementarios </h1>
-
-<P></P>Asesoría en marketing digital
-Te orientamos en cómo aprovechar internet para aumentar tus ventas.
-
-<P></P>Automatización básica con WhatsApp y catálogos virtuales
-Herramientas para recibir pedidos y consultas automáticamente.
-
-<P></P>Soporte técnico y actualizaciones
-Mantenimiento de tu página web y mejora continua.</UL>
-
-</div> 
+<section id="servicios" class="wrap">
+  <h2>Lo que hacemos por tu negocio</h2>
+  <p class="lead">Cuatro áreas, un solo equipo. Desde tu primera página hasta la campaña que te trae clientes.</p>
+  <div class="services">
+    <article class="svc"><i class="fa-solid fa-code"></i><h3>Diseño y desarrollo web</h3>
+      <ul><li>Páginas modernas y responsivas</li><li>Tiendas online y catálogos digitales</li><li>Landing pages para captar clientes</li><li>SEO básico para aparecer en Google</li></ul></article>
+    <article class="svc"><i class="fa-solid fa-bullhorn"></i><h3>Publicidad y marketing</h3>
+      <ul><li>Facebook e Instagram Ads</li><li>Google Ads</li><li>Gestión de redes sociales</li><li>Email marketing básico</li></ul></article>
+    <article class="svc"><i class="fa-solid fa-pen-nib"></i><h3>Diseño gráfico y branding</h3>
+      <ul><li>Logos e identidad visual</li><li>Manual de identidad básico</li><li>Tarjetas digitales interactivas</li><li>Flyers, banners y piezas para redes</li></ul></article>
+    <article class="svc"><i class="fa-solid fa-film"></i><h3>Contenido multimedia</h3>
+      <ul><li>Videos publicitarios y reels</li><li>Animaciones y motion graphics</li><li>Edición de video profesional</li><li>Invitaciones digitales animadas</li></ul></article>
+  </div>
+  <p class="extra">También ofrecemos asesoría en marketing digital, automatización con WhatsApp y catálogos virtuales, y soporte técnico para tu web.</p>
 </section>
 
-<section id="trabajos" class="trabajos">
-
-<h2>Portfolio Interactivo</h2>
-
-<div class="showcase">
-  <h3>Sitios Web</h3>
-  <div class="carousel" data-type="web">
-    <!-- Ejemplo de trabajo con imagen -->
-     <div class="card">
-         <div class="card-media">
-      <img src="img/tendero y carrito.jfif" alt="Proyecto 1" onclick="abrirModal(this)">
-      </div>
-       <div class="card-content">
-      <h3> card digital con  Página Web para Empresa</h3>
-      <p> Diseño card digital y  pagina para poder  ver su catalogo y de  mas informacion</p>
-      <a href="https://descocard.netlify.app//" target="_blank" class="btn-ver">Ver página</a>
-    </div>
-     </div>
-      <div class="card">
-         <div class="card-media">
-      <img src="img/descomanos.png" alt="Proyecto 1" onclick="abrirModal(this)">
-      </div>
-       <div class="card-content">
-      <h3> Catalogo en Página Web para Empresa</h3>
-      <p> Diseño de pagina para poder  ver su catalogo</p>
-      <a href="https://catalogodesco.netlify.app/" target="_blank" class="btn-ver">Ver página</a>
-    </div>
-     </div>
-
-       <div class="card">
-         <div class="card-media">
-      <img src="img/tarjdes.png" alt="Proyecto 1" onclick="abrirModal(this)">
-      </div>
-       <div class="card-content">
-      <h3>Página Web para Empresa</h3>
-      <p> Diseño de tarjeta digital con plataforma de ventas digitales  </p>
-      <a href="https://descoapp.netlify.app/" target="_blank" class="btn-ver">Ver página</a>
-    </div>
-     </div>
-    <!-- mueve aquí tus cards web -->
-  </div>
-</div>
-
-<div class="showcase">
-  <h3>Videos</h3>
-  <div class="carousel" data-type="video">
-    <!-- mueve aquí tus cards de video -->
-      <!-- Ejemplo de trabajo con video -->
-    
-    <div class="card" >
-  <div class="card-media">
-    <video src="videos/Todos los días empiezo igual, un tinto y mi (1).mp4"
-       onclick="abrirModal(this)"
-       muted
-       playsinline
-       preload="metadata"></video>
-  </div>
-    <div class="card-content">
-    <h3>Video Publicitario</h3>
-    <p>Spot creado para cliente...</p>
-  </div>
-</div>
-
-
- <div class="card" >
-  <div class="card-media">
-    <video src="videos/BETY DESCOAP SE DICE DE MI .mp4"
-       onclick="abrirModal(this)"
-       muted
-       playsinline
-       preload="metadata"></video>
-  </div>
-    <div class="card-content">
-    <h3>Video Publicitario</h3>
-    <p>Spot creado para cliente...</p>
-  </div>
-</div>
-
- <div class="card" >
-  <div class="card-media">
-    <video src="videos/El texto del párrafo.mp4"
-       onclick="abrirModal(this)"
-       muted
-       playsinline
-       preload="metadata"></video>
-  </div>
-    <div class="card-content">
-    <h3>Video Publicitario</h3>
-    <p>Spot creado para cliente...</p>
-  </div>
-</div>
-
-<div class="card" >
-  <div class="card-media">
-    <video src="videos/E¡Soy el TENDERO del FUTURO! (1).mp4"
-       onclick="abrirModal(this)"
-       muted
-       playsinline
-       preload="metadata"></video>
-  </div>
-    <div class="card-content">
-    <h3>Video Publicitario</h3>
-    <p>Spot creado para cliente...</p>
-  </div>
-  </div>
-
-  <div class="card" >
-  <div class="card-media">
-    <video src="videos/click autentica new.mp4"
-       onclick="abrirModal(this)"
-       muted
-       playsinline
-       preload="metadata"></video>
-  </div>
-    <div class="card-content">
-    <h3>Video Publicitario</h3>
-    <p>Spot creado para cliente...</p>
-  </div>
-</div>
-
-
- <div class="card" >
-  <div class="card-media">
-    <video src="videos/PONYREEL.mp4"
-       onclick="abrirModal(this)"
-       muted
-       playsinline
-       preload="metadata"></video>
-  </div>
-    <div class="card-content">
-    <h3>Video Publicitario</h3>
-    <p>Spot creado para cliente...</p>
-  </div>
-</div>
- 
-
-<div class="card" >
-  <div class="card-media">
-    <video src="videos/TORTAROJAREEL.mp4"
-       onclick="abrirModal(this)"
-       muted
-       playsinline
-       preload="metadata"></video>
-  </div>
-    <div class="card-content">
-    <h3>Video Publicitario</h3>
-    <p>Spot creado para cliente...</p>
-  </div>
-</div>
-
- 
-<div class="card" >
-  <div class="card-media">
-    <video src="videos/SUPREMOREEL.mp4"
-       onclick="abrirModal(this)"
-       muted
-       playsinline
-       preload="metadata"></video>
-  </div>
-    <div class="card-content">
-    <h3>Video Publicitario</h3>
-    <p>Spot creado para cliente...</p>
-  </div>
-</div>
-  </div>
-</div>
-
-<div class="showcase">
-  <h3>Flyers & Logos</h3>
-  <div class="carousel" data-type="design">
-    <!-- mueve aquí tus cards de flyers -->
-     <div class="card">
-         <div class="card-media">
-         <img src="img/DISTRIANDINA.png" alt="Logo Diseñado" onclick="abrirModal(this)">
-     </div>
-     <div class="card-content">
-      <h3>Logo Profesional</h3>
-      <p> Realice logo  para la empresa Distriandina </p>
-    </div>
-    </div>
-
-     <div class="card" >
-         <div class="card-media">
-         <img src="img/superd.png" alt="Logo Diseñado" onclick="abrirModal(this)">
-     </div>
-     <div class="card-content">
-      <h3>Logo Profesional</h3>
-      <p> Realice logo  para la empresa DESCO </p>
-    </div>
-    </div>
-
-     <div class="card">
-         <div class="card-media">
-         <img src="img/autentica.png" alt="Logo Diseñado" onclick="abrirModal(this)">
-     </div>
-     <div class="card-content">
-      <h3>Logo Profesional</h3>
-      <p> Realice logo  para la empresa Autentica </p>
-    </div>
-    </div>
-
-     <!-- Ejemplo de trabajo con flayers publicitarios -->
-
-    
-    <div class="card">
-         <div class="card-media">
-         <img src="img/1.jpg" alt="flayer Publicitario" onclick="abrirModal(this)">
-     </div>
-     <div class="card-content">
-      <h3>flayer Publicitario</h3>
-      <p> Realice flayer para la empresa Desco </p>
-    </div>
-    </div>
-
-    <div class="card">
-         <div class="card-media">
-         <img src="img/2.jpg" alt="flayer Publicitario" onclick="abrirModal(this)">
-     </div>
-     <div class="card-content">
-      <h3>flayer Publicitario</h3>
-      <p> Realice flayer para la empresa Desco </p>
-    </div>
-    </div>
-
-    <div class="card">
-         <div class="card-media">
-         <img src="img/3.jpg" alt="flayer Publicitario" onclick="abrirModal(this)">
-     </div>
-     <div class="card-content">
-      <h3>flayer Publicitario</h3>
-      <p> Realice flayer  para la empresa Desco </p>
-    </div>
-    </div>
-
-    <div class="card">
-         <div class="card-media">
-         <img src="img/Infografía Descuentos Supermercado Moderno Rojo y Amarillo (2).jpg" alt="flayer Publicitario" onclick="abrirModal(this)">
-     </div>
-     <div class="card-content">
-      <h3>flayer Publicitario</h3>
-      <p> Realice infpografia para la empresa Desco </p>
-    </div>
-    </div>
-    
-     <div class="card">
-         <div class="card-media">
-         <img src="img/prom.jpg" alt="flayer Publicitario" onclick="abrirModal(this)">
-     </div>
-     <div class="card-content">
-      <h3>flayer Publicitario</h3>
-      <p> Realice flayer para la empresa Desco </p>
-    </div>
-    </div>
- 
-     <div class="card">
-         <div class="card-media">
-         <img src="img/QUE RICAS PAPAS (5).png" alt="flayer Publicitario" onclick="abrirModal(this)">
-     </div>
-     <div class="card-content">
-      <h3>flayer Publicitario</h3>
-      <p> Realice flayer  de muestra  </p>
-    </div>
-    </div>
-
-  </div>
-</div>
-
+<section id="trabajos" class="wrap">
+  <h2>Trabajos recientes</h2>
+  <p class="lead">Desliza, arrastra o usa las flechas. Toca cualquier pieza para verla en grande.</p>
+  <div class="showcase"><div class="sc-head"><h3>Sitios web</h3><div class="arrows"><button data-dir="-1" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button><button data-dir="1" aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button></div></div><div class="track" id="web"></div></div>
+  <div class="showcase"><div class="sc-head"><h3>Videos</h3><div class="arrows"><button data-dir="-1" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button><button data-dir="1" aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button></div></div><div class="track" id="video"></div></div>
+  <div class="showcase"><div class="sc-head"><h3>Flyers y logos</h3><div class="arrows"><button data-dir="-1" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button><button data-dir="1" aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button></div></div><div class="track" id="design"></div></div>
 </section>
 
- 
-   
-
-
-
-<div id="modal" class="modal">
-  <span class="cerrar" onclick="cerrarModal()">&times;</span>
-  <img id="modal-img" class="modal-contenido" alt="">
-  <video id="modal-video" class="modal-contenido" controls></video>
-</div>
-
-<section id="contacto">
-  <h2>Contacto</h2>
-  <p>Si te interesa conocer más sobre nuestros servicios, contáctanos directamente por WhatsApp  estaremos  atentos  para poder servirte  de corazón .</p>
+<section id="invitaciones" class="wrap inv">
+  <h2>Invitaciones digitales</h2>
+  <p class="lead">Bodas, quinceaños, cumpleaños, bautizos y eventos de empresa. Con música, cuenta regresiva, ubicación y confirmación por WhatsApp.</p>
+  <div class="showcase"><div class="sc-head"><h3>Nuestros diseños</h3><div class="arrows"><button data-dir="-1" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button><button data-dir="1" aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button></div></div><div class="track phones" id="invites"></div></div>
+  <div class="inv-feats">
+    <span><i class="fa-solid fa-music"></i> Música de fondo</span>
+    <span><i class="fa-solid fa-hourglass-half"></i> Cuenta regresiva</span>
+    <span><i class="fa-solid fa-location-dot"></i> Mapa del lugar</span>
+    <span><i class="fa-brands fa-whatsapp"></i> Confirmación de asistencia</span>
+  </div>
 </section>
 
-<!-- Botón de WhatsApp -->
- 
-<a href="https://wa.me/573246030396?text=Hola,%20quiero%20informacion%20sobre%20tus%20servicios%20de%20programacion ,%20diseño%20y%20publicidad" class="whatsapp" target="_blank">
-  <img src="img/whatsapp.webp" alt="WhatsApp">
+<section id="contacto" class="wrap contact">
+  <h2>Hablemos de tu proyecto</h2>
+  <p class="lead">Cuéntanos qué necesitas y te respondemos por WhatsApp con una propuesta.</p>
+  <a class="btn btn-primary" target="_blank" href="https://wa.me/573246030396?text=Hola,%20quiero%20informacion%20sobre%20tus%20servicios%20de%20programacion,%20diseño%20y%20publicidad"><i class="fab fa-whatsapp"></i> Escribir ahora</a>
+</section>
 
-</a>
-
-<script src="script.js"></script>
-</body>
 <footer>
-  <p>© 2026 DEESA-DEV | Todos los derechos reservados | Desarrollado por  DEESA-DEV</p>
+  <p>© 2026 DEESA-DEV · Todos los derechos reservados</p>
   <div class="redes">
-    <a href="https://facebook.com/desco.si" target="_blank"><i class="fab fa-facebook"></i></a>
-    <a href="https://instagram.com/desco-col" target="_blank"><i class="fab fa-instagram"></i></a>
-    
-  <!--  <a href="https://youtube.com/TUUSUARIO" target="_blank"><i class="fab fa-youtube"></i></a> -->
+    <a href="https://facebook.com/desco.si" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+    <a href="https://instagram.com/desco-col" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
   </div>
 </footer>
 
+<div id="modal" class="modal" role="dialog" aria-modal="true">
+  <button class="cerrar" aria-label="Cerrar">&times;</button>
+  <img id="modal-img" alt="">
+  <video id="modal-video" controls playsinline></video>
+</div>
 
+<a href="https://wa.me/573246030396?text=Hola,%20quiero%20informacion%20sobre%20tus%20servicios" class="whatsapp" target="_blank" aria-label="WhatsApp"><img src="img/whatsapp.webp" alt="WhatsApp"></a>
 
-
+<script src="script.js"></script>
+</body>
 </html>
