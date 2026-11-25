@@ -40,7 +40,8 @@ const WORKS = {
     {url:"https://dannavalentina.netlify.app/", t:"Invitación de quinceañera", d:"Colorida y animada."},
     {url:"https://quincerosado.netlify.app/", t:"Invitación de quinceañera", d:"Colorida y animada."},
     {url:"https://annyvalentina.netlify.app/", t:"Invitación de quinceañera", d:"Colorida y animada."},
-     {url:"https://cumpletina.netlify.app/", t:"Invitación de cumpleaños", d:"Colorida y animada."}
+    {url:"https://cumpletina.netlify.app/", t:"Invitación de cumpleaños", d:"Colorida y animada."},
+    {url:"https://mygrado.netlify.app/", t:"Invitación de Grado", d:"Colorida y animada."}
     /*{url:"", t:"Bautizo", d:"Suave, con confirmación por WhatsApp."}*/
   ]
 };
